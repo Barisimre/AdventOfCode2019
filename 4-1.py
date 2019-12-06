@@ -1,5 +1,5 @@
 count = 0
-for i in range(172930,683083):
+for i in range(246540,787419):
     st = str(i)
     double = False
     # Increasing
