@@ -11,4 +11,4 @@ Everything is just a means to get an answer
 
 Will make it pretty at some point tm
 
-https://stackoverflow.com/questions/39336842/make-git-repo-public-without-revealing-past-commits
+https://stackoverflow.com/questions/39336842
