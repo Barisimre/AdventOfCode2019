@@ -1,8 +1,8 @@
+import itertools
 def lines():
     words = []
     with open("input.txt") as fp:
         return fp.readline()
-
 
 
 def parse():
@@ -13,17 +13,13 @@ def parse():
     for word in words:
         res[pos] = int(word)
         pos += 1
-    # Add some memory
-    # for i in range(10):
-    #     res[pos] = -1
-    #     pos += 1
-
     return res
 
     
-def solve():
-    program = '\n'
-    words = parse()
+def compile(inputs, program):
+    res = 0
+    words = program.copy()
+    inputCounter = 0
     pointer = 0
     while pointer < len(words):
         
@@ -31,28 +27,20 @@ def solve():
         op = int(allop[len(allop)-1])
 
         if op == 3:
-            words[words[pointer+1]] = 5 # TODO
-            print("Input address", words[pointer+1], "input = 1")
-            # print(words[words[pointer+1]])
-            program = program + "  3  " +  "1" +'\n'
+            words[words[pointer+1]] = inputs[inputCounter]
+            inputCounter+=1
             pointer += 2
             continue
 
         if op == 4:
-            if allop == "104":
-                print("OUTPUT = ", words[pointer+1])
-            else:
-                print("OUTPUT = ", words[words[pointer+1]])
+            # print("OUTPUT = ", words[words[pointer+1]])
+            res = words[words[pointer+1]]
 
-            program = program + "  4  addr=" + str(words[pointer+1]) +  '\n'
             pointer += 2
             continue
 
         if op == 9:
-            print("Nien nien")
-            
-            print(program, " 99\n")
-            return words
+            return res
 
         # Fix the opcode lengths
         while len(allop) < 5:
@@ -73,7 +61,6 @@ def solve():
                 pointer += 3
             continue
 
-
         elif op == 6:
             if a == 0:
                 pointer = b
@@ -86,7 +73,6 @@ def solve():
                 words[c] = 1
             else:
                 words[c] = 0
-
 
         elif op == 8:
             if a == b:
@@ -102,9 +88,26 @@ def solve():
             total = a * b
             words[c] = total
 
-        program = program + "  " + allop + "  " + str(a) + "  " + str(b) + "  " + str(c) + '\n'
         pointer += 4
-        print(pointer)
 
-#print(solve())
+def solve():
+    phases = [0, 1, 2, 3, 4]
+    squences = list(itertools.permutations([0,1,2,3,4]))
+    program = parse()
+    out = 0
+    maxOut = (0, [0,0,0,0,0])
+    pointer = 0
+    for sq in squences:
+        for j in range(5):
+            nProgram = program.copy()
+            out = compile([sq[j],out], nProgram)
+        if out >= maxOut[0]:
+            maxOut = (out, sq)
+        out = 0
+    print(maxOut) 
+    pass
+
+
+
+
 solve()
