@@ -15,7 +15,6 @@ def parse():
         groups.append([int(rawData[x]) for x in range(i, i+wide)])
 
 
-    print(len(rawData), len(groups))
     layers = []
     temp = []
     p = 0
@@ -26,6 +25,7 @@ def parse():
             layers.append(temp.copy())
             temp.clear()
             p = 0
+    print(layers[3])
     return layers
 
 
@@ -35,15 +35,11 @@ def solve():
     linedex = 0
     maxCount = (9999, [])
     for l in layers:
-        # print(l)
-
         count = 0
         for t in l:
             for w in t:
-                if w == 0:
-                    
+                if w == 0:      
                     count += 1
-        
         if count <= maxCount[0]:
             maxCount= (count, l)
     print(maxCount)
