@@ -10,12 +10,7 @@ def lines():
             line = fp.readline().strip()
     return words
 
-def cart2pol(a):
-    x = a[0]
-    y = a[1]
-    rho = np.sqrt(x**2 + y**2)
-    phi = np.arctan2(y, x)
-    return(rho, phi)
+
 
 
 def parse():
@@ -56,20 +51,34 @@ def solve():
         else:
             targets[slope(us, target)] = target
     count = 0
-    pol = []
-    pus = cart2pol(us)
-    for i in targets:
-        pol.append(cart2pol(targets[i]))
-    yes = sorted(pol, key=lambda x : math.atan2(x[1]-pus[1], x[0]-pus[0]))
-    print(yes)
-    return yes[200]
 
-def pol2cart(a):
-    rho = a[0]
-    phi = a[1]
 
-    x = rho * np.cos(phi)
-    y = rho * np.sin(phi)
-    return(x, y)
+    # a = f,t
+    # b = t,t
+    # c = t,f
+    # d = f,f
+    a= []
+    b= []
+    c= []
+    d= []
 
-print(pol2cart(solve()))
+    for t in targets:
+        
+        if t[1] and t[2]:
+            a.append((t, targets[t]))
+        if not t[1] and t[2]:
+            b.append((t, targets[t]))
+        if not t[1] and not t[2]:
+            c.append((t, targets[t]))
+        if t[1] and not t[2]:
+            d.append((t, targets[t]))
+    sa = sorted(a)
+    sb = sorted(b)
+    sc = sorted(c)
+    sd = sorted(d)
+
+    i = 199 - (len(a)+len(d)+len(b))
+    return sc[i] # pure magic 
+
+
+print(solve())
