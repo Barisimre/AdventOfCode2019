@@ -50,20 +50,15 @@ def solve():
                 targets[slope(us, target)] = target
         else:
             targets[slope(us, target)] = target
-    count = 0
-
-
     # a = f,t
     # b = t,t
     # c = t,f
     # d = f,f
-    a= []
-    b= []
-    c= []
-    d= []
-
+    a = []
+    b = []
+    c = []
+    d = []
     for t in targets:
-        
         if t[1] and t[2]:
             a.append((t, targets[t]))
         if not t[1] and t[2]:
@@ -78,7 +73,7 @@ def solve():
     sd = sorted(d)
 
     i = 199 - (len(a)+len(d)+len(b))
-    return sc[i] # pure magic 
+    return sc[i] # pure magic calibrated through the given example
 
 
 print(solve())
