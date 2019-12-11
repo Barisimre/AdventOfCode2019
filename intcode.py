@@ -32,6 +32,7 @@ class IntCode:
         self.inputs = inp
 
     def run(self):
+
         
         # Make local variables
         program = self.memory
@@ -47,6 +48,7 @@ class IntCode:
 
             # Quit
             if op == 99:
+                self.outputs.append(-1)
                 break
 
             if mode1 == self.IMM:
