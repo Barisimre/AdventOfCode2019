@@ -16,16 +16,16 @@ def update(x, y, t):
     if t == 0:
         c = " "
     elif t == 1:
-        c = "'"
+        c = "█"
     elif t == 2:
-        c = "#"
+        c = "▒"
     elif t == 3:
         global paddle
         paddle = x
-        c = "_"
+        c = "═"
     else:
         ball(x, y)
-        c = "*"
+        c = "●"
 
     grid[y][x] = c
 
