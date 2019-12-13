@@ -48,7 +48,7 @@ class IntCode:
 
             # Quit
             if op == 99:
-                self.outputs.append(-1)
+                self.outputs.append("end")
                 break
 
             if mode1 == self.IMM:
